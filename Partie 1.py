@@ -143,3 +143,4 @@ Ntot = 10
 n = 5
 histogramme1D_retour_à_0(Ntot,n)
 # %%
+# DQOQSIO
