@@ -8,7 +8,7 @@ import random
 import statistics as st
 from collections import Counter
 
-# %% Questions 2/3 TODO: traits plus fins (mouvement browniens)
+# %% Questions 2/3 TODO: ici on voit des mouvement browniens
 # -------------------- Marche aléatoire 2D
 
 
@@ -362,4 +362,44 @@ def distanceSR(n, nbsample):
 
 
 distanceSR(1000, 1000)
-# %%
+# %% Question 5
+# -------------------- Probabilité de retour à (0,0)
+
+
+def retour02D(n, nbsample):
+    j = 0
+    nb0 = 0
+    posX = 0
+    posY = 0
+    retour0 = False
+
+    for i in range(0, nbsample):
+        # On arrète la boucle dès que le parcours passe par (0,0) pour réduire le temps d'éxecution
+        while (j != n+1) & (retour0 == False):
+            rdm = random.uniform(0, 1)
+            if rdm <= 0.25:
+                posX += 1
+            elif (rdm <= 0.5) & (rdm > 0.25):
+                posX += -1
+            elif (rdm <= 0.75) & (rdm > 0.5):
+                posY += 1
+            else:
+                posY += -1
+            if (posX == 0) & (posY == 0):
+                retour0 = True
+                nb0 += 1
+            j += 1
+        retour0 = False
+        posX = 0
+        posY = 0
+        j = 0
+
+    print("On a un nombre de pas ", n)
+    print("Nombre de retours à 0 pour ",
+          nbsample, " marches aléatoires : ", nb0)
+    print("Soit une probabilité de retourner à 0 de : ", round(nb0/nbsample, 3))
+
+
+# distance(n,nbsample) avec n le nombre de pas et nbsample le nombre d'échantillons
+# les points bleu représentent tout les points (Xn,Yn) et le rose l'origine
+retour02D(10, 10000)
