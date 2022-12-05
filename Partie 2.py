@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import math
 import random
 import statistics as st
-import matplotlib.ticker as ticker
 from collections import Counter
 
 # %% Questions 2/3 TODO: traits plus fins (mouvement browniens)
@@ -73,11 +72,9 @@ def marche2(n):
 
     # Traçage de la courbe (en fait une série de points)
     color = [k for k in range(len(resultXdr))]
-    fig, ax = plt.subplots()
     plt.title("Marche aléatoire 2D avec n = " + str(n))
     plt.scatter(resultXdr, resultYdr, c=color, cmap='Spectral', s=size)
-    # ax.xaxis.set_major_locator(ticker.MaxNLocator(8))
-    # ax.yaxis.set_major_locator(ticker.MaxNLocator(8))
+    plt.locator_params(axis='both', nbins=6)
     plt.axis('square')
     plt.grid()
     plt.show()
@@ -211,8 +208,9 @@ def marche2SR(n):
     color = [k for k in range(len(resultXdr))]
     plt.title("Marche aléatoire 2D sans retour avec n = " + str(n))
     plt.scatter(resultXdr, resultYdr, c=color, cmap='Spectral', s=size)
+    plt.locator_params(axis='both', nbins=6)
+    plt.axis('square')
     plt.grid()
-    plt.axis('equal')
     plt.show()
 
 
@@ -253,6 +251,8 @@ def distance(n, nbsample):
     plt.title("Marche 2D avec n = " + str(n) +
               " et " + str(nbsample) + " répétitions")
     plt.grid()
+    plt.locator_params(axis='both', nbins=6)
+    plt.axis('square')
     plt.show()
     print("Pour n=", n, " la distance moyenne à l'origine est de ", st.mean(distance))
 
@@ -355,6 +355,8 @@ def distanceSR(n, nbsample):
     plt.title("Marche 2D sans retour avec n = " + str(n) +
               " et " + str(nbsample) + " répétitions")
     plt.grid()
+    plt.locator_params(axis='both', nbins=6)
+    plt.axis('square')
     plt.show()
     print("Pour n=", n, " la distance moyenne à l'origine est de ", st.mean(distance))
 
