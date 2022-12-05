@@ -6,9 +6,10 @@ import matplotlib.pyplot as plt
 import math
 import random
 import statistics as st
+import matplotlib.ticker as ticker
 from collections import Counter
 
-# %% Questions 2/3
+# %% Questions 2/3 TODO: traits plus fins (mouvement browniens)
 # -------------------- Marche aléatoire 2D
 
 
@@ -16,6 +17,7 @@ def marche2(n):
     # Initialisation des variables
     posX = 0
     posY = 0
+    size = 2
     temp = []
     resultX = []
     resultY = []
@@ -61,15 +63,27 @@ def marche2(n):
                 resultXdr.append(resultX[i])
             temp = []
 
+    # On modifie la largeur du trait
+    if n > 500:
+        size = 1
+    elif n > 2000:
+        size = 0.5
+    elif n > 6000:
+        size = 0.01
+
     # Traçage de la courbe (en fait une série de points)
     color = [k for k in range(len(resultXdr))]
+    fig, ax = plt.subplots()
     plt.title("Marche aléatoire 2D avec n = " + str(n))
-    plt.scatter(resultXdr, resultYdr, c=color, cmap='Spectral')
+    plt.scatter(resultXdr, resultYdr, c=color, cmap='Spectral', s=size)
+    # ax.xaxis.set_major_locator(ticker.MaxNLocator(8))
+    # ax.yaxis.set_major_locator(ticker.MaxNLocator(8))
+    plt.axis('square')
     plt.grid()
     plt.show()
 
 
-marche2(100)
+marche2(500)
 
 
 # -------------------- Marche aléatoire 2D sans retour en arrière
@@ -78,6 +92,7 @@ marche2(100)
 def marche2SR(n):
     posX = 0
     posY = 0
+    size = 2
     done = False
     addX = False
     subX = False
@@ -186,10 +201,18 @@ def marche2SR(n):
                 resultXdr.append(resultX[i])
             temp = []
 
+    if n > 500:
+        size = 1
+    elif n > 2000:
+        size = 0.5
+    elif n > 6000:
+        size = 0.01
+
     color = [k for k in range(len(resultXdr))]
     plt.title("Marche aléatoire 2D sans retour avec n = " + str(n))
-    plt.scatter(resultXdr, resultYdr, c=color, cmap='Spectral')
+    plt.scatter(resultXdr, resultYdr, c=color, cmap='Spectral', s=size)
     plt.grid()
+    plt.axis('equal')
     plt.show()
 
 
