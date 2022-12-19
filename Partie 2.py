@@ -564,13 +564,13 @@ def secteurs2D(n, nbsample):
     print("On a un nombre de pas ", n, " et ", nbsample, " marches aléatoires")
     print("Le marcheur fait :")
     print(xposypos, " pas dans le quadrant X positif Y positif soit ",
-          xposypos/totalpas, "% des pas")
+          100*xposypos/totalpas, "% des pas")
     print(xnegypos, " pas dans le quadrant X négatif Y positif soit ",
-          xnegypos/totalpas, "% des pas")
+          100*xnegypos/totalpas, "% des pas")
     print(xnegyneg, " pas dans le quadrant X négatif Y négatif soit ",
-          xnegyneg/totalpas, "% des pas")
+          100*xnegyneg/totalpas, "% des pas")
     print(xposyneg, " pas dans le quadrant X positif Y négatif soit ",
-          xposyneg/totalpas, "% des pas")
+          100*xposyneg/totalpas, "% des pas")
     print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
 
 
@@ -683,13 +683,13 @@ def secteurs2DSR(n, nbsample):
     print("On a un nombre de pas ", n, " et ", nbsample, " marches aléatoires")
     print("Le marcheur fait :")
     print(xposypos, " pas dans le quadrant X positif Y positif soit ",
-          xposypos/totalpas, "% des pas")
+          100*xposypos/totalpas, "% des pas")
     print(xnegypos, " pas dans le quadrant X négatif Y positif soit ",
-          xnegypos/totalpas, "% des pas")
+          100*xnegypos/totalpas, "% des pas")
     print(xnegyneg, " pas dans le quadrant X négatif Y négatif soit ",
-          xnegyneg/totalpas, "% des pas")
+          100*xnegyneg/totalpas, "% des pas")
     print(xposyneg, " pas dans le quadrant X positif Y négatif soit ",
-          xposyneg/totalpas, "% des pas")
+          100*xposyneg/totalpas, "% des pas")
     print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
 
 
@@ -829,7 +829,7 @@ def secteursCustom2D(n, nbsample):
     print("Fréquences de passage : ")
     for i in range(len(repartitionPas)):
         print("Secteur ", i+1, " a une fréquence de passage de : ",
-              repartitionPas[i]/totalPas)
+              100*repartitionPas[i]/totalPas)
     print("Pas totaux : ", totalPas)
 
 
