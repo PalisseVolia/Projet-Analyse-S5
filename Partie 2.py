@@ -8,7 +8,7 @@ import random
 import statistics as st
 from collections import Counter
 
-# %% Questions 2/3 TODO: ici on voit des mouvement browniens
+# %% Questions 2/3
 print("\n \n Questions 2/3")
 # -------------------- Marche aléatoire 2D
 print("\n Marche aléatoire 2D \n")
@@ -515,7 +515,7 @@ def retour02DSR(n, nbsample):
           round(nb0/nbsample, 3))
 
 
-retour02DSR(100, 1000)
+retour02DSR(100, 10000)
 
 
 # %% Question 6
@@ -746,12 +746,12 @@ def demidroites():
     angles.sort()
 
 
-# TODO: Choix des demi droites
-# demidroites()
+# Choix des demi droites
+demidroites()
 
 
-# TODO: Exemples préremplis (on devrait avoir 25%, 25%, 25%, 12.5%, 12.5%)
-angles = [45, 90, 180, 270, 315]
+# Exemples préremplis (on devrait avoir 25%, 25%, 25%, 12.5%, 12.5%)
+# angles = [45, 90, 180, 270, 315]
 
 
 # -------------------- Fréquence de passage dans chaque secteur
