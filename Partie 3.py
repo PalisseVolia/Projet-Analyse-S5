@@ -161,7 +161,7 @@ def distance(n, nbsample):
 
 # distance(n,nbsample) avec n le nombre de pas et nbsample le nombre d'échantillons
 # les points bleu représentent tout les points (Xn,Yn,Zn) et le rose l'origine
-distance(1000, 1000)
+distance(100, 1000)
 
 
 # %% Question 5
@@ -210,7 +210,7 @@ def retour03D(n, nbsample):
     print("Soit une probabilité de retourner à 0 de : ", round(nb0/nbsample, 3))
 
 
-retour03D(1000, 10000)
+retour03D(100000, 1000)
 
 
 # %% Question 6

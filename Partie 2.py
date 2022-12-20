@@ -2,11 +2,13 @@
 from turtle import color
 from matplotlib import colors
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import math
 import random
 import statistics as st
 from collections import Counter
+matplotlib.rcParams["figure.dpi"] = 500
 
 # %% Questions 2/3
 print("\n \n Questions 2/3")
