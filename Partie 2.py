@@ -72,7 +72,7 @@ def marche2(n):
     elif n > 6000:
         size = 0.01
 
-    # Traçage de la courbe (en fait une série de points)
+    # Traçé de la courbe (en fait une série de points)
     color = [k for k in range(len(resultXdr))]
     plt.title("Marche aléatoire 2D avec n = " + str(n))
     plt.scatter(resultXdr, resultYdr, c=color, cmap='Spectral', s=size)
@@ -696,7 +696,7 @@ def secteurs2DSR(n, nbsample):
 secteurs2DSR(100, 10000)
 
 
-# %% Question 6
+# %% Question 7
 print("\n \n Question 7")
 # -------------------- Définition des secteurs
 print("\n Définition des secteurs \n")
@@ -746,12 +746,12 @@ def demidroites():
     angles.sort()
 
 
-# TODO: supprimer le commentaire
-demidroites()
+# TODO: Choix des demi droites
+# demidroites()
 
 
-# TODO: supprimer (test uniquement) (on devrait avoir 25%, 25%, 25%, 12.5%, 12.5%)
-# angles = [45, 90, 180, 270, 315]
+# TODO: Exemples préremplis (on devrait avoir 25%, 25%, 25%, 12.5%, 12.5%)
+angles = [45, 90, 180, 270, 315]
 
 
 # -------------------- Fréquence de passage dans chaque secteur
@@ -822,7 +822,6 @@ def secteursCustom2D(n, nbsample):
         posX = 0
         posY = 0
 
-    print(repartitionPas)
     totalPas = 0
     for i in range(len(repartitionPas)):
         totalPas += repartitionPas[i]
@@ -833,4 +832,148 @@ def secteursCustom2D(n, nbsample):
     print("Pas totaux : ", totalPas)
 
 
-secteursCustom2D(1000, 10000)
+secteursCustom2D(100, 10000)
+
+
+# -------------------- Fréquence de passage dans chaque secteur sans retour
+print("\n Fréquence de passage dans chaque secteur sans retour \n")
+
+
+def secteursCustom2DSR(n, nbsample):
+    k = 0
+    posX = 0
+    posY = 0
+    anglePas = 0
+    addX = False
+    subX = False
+    addY = False
+    subY = False
+    done = False
+    done2 = False
+    repartitionPas = np.zeros(len(angles))
+
+    for i in range(0, nbsample):
+        rdm = random.uniform(0, 1)
+        if rdm <= 0.25:
+            addX = True
+        elif (rdm <= 0.5) & (rdm > 0.25):
+            subX = True
+        elif (rdm <= 0.75) & (rdm > 0.5):
+            addY = True
+        else:
+            subY = True
+
+        for j in range(1, n+1):
+            rdm = random.uniform(0, 1)
+            if (addX == True) & (done == False):
+                if rdm <= 1/3:
+                    posX += 1
+                    addX = False
+                    addX = True
+                elif (rdm <= 2/3) & (rdm > 1/3):
+                    posY += 1
+                    addX = False
+                    addY = True
+                else:
+                    posY += -1
+                    addX = False
+                    subY = True
+                done = True
+            if (subX == True) & (done == False):
+                if rdm <= 1/3:
+                    posX += -1
+                    subX = False
+                    subX = True
+                elif (rdm <= 2/3) & (rdm > 1/3):
+                    posY += 1
+                    subX = False
+                    addY = True
+                else:
+                    posY += -1
+                    subX = False
+                    subY = True
+                done = True
+            if (addY == True) & (done == False):
+                if rdm <= 1/3:
+                    posX += 1
+                    addY = False
+                    addX = True
+                elif (rdm <= 2/3) & (rdm > 1/3):
+                    posY += 1
+                    addY = False
+                    addY = True
+                else:
+                    posX += -1
+                    addY = False
+                    subX = True
+                done = True
+            if (subY == True) & (done == False):
+                if rdm <= 1/3:
+                    posX += 1
+                    subY = False
+                    addX = True
+                elif (rdm <= 2/3) & (rdm > 1/3):
+                    posX += -1
+                    subY = False
+                    subX = True
+                else:
+                    posY += -1
+                    subY = False
+                    subY = True
+                done = True
+            done = False
+
+            # On calcule l'angle du nouveau point
+            if (posX+posY != 0.0):
+                if (posX >= 0.0) & (posY >= 0.0):
+                    if posX != 0.0:
+                        anglePas = math.degrees(math.atan(posY/posX))
+                    else:
+                        anglePas = 90
+                elif (posX <= 0.0) & (posY >= 0.0):
+                    if posY != 0.0:
+                        anglePas = -1*math.degrees(math.atan(posX/posY))+90
+                    else:
+                        anglePas = 180
+
+                elif (posX <= 0.0) & (posY <= 0.0):
+                    if posX != 0.0:
+                        anglePas = math.degrees(math.atan(posY/posX))+180
+                    else:
+                        anglePas = 270
+                else:
+                    if posY != 0.0:
+                        anglePas = -1 * \
+                            math.degrees(math.atan(posX/posY))+270
+                    else:
+                        anglePas = 0
+            # On compare l'angle pour déterminer dans quel quadrant se situe le marcheur
+            while (k <= len(angles)) & (done2 == False):
+                if (k == len(angles)) & (anglePas >= angles[k-1]):
+                    repartitionPas[0] += 1
+                    done2 = True
+                elif k != len(angles):
+                    if (k == 0) & (anglePas <= angles[k]):
+                        repartitionPas[0] += 1
+                        done2 = True
+                    elif (angles[k-1] < anglePas <= angles[k]) & (k != 0):
+                        repartitionPas[k] += 1
+                        done2 = True
+
+                k += 1
+            k = 0
+            done2 = False
+        posX = 0
+        posY = 0
+
+    totalPas = 0
+    for i in range(len(repartitionPas)):
+        totalPas += repartitionPas[i]
+    print("Fréquences de passage : ")
+    for i in range(len(repartitionPas)):
+        print("Secteur ", i+1, " a une fréquence de passage de : ",
+              100*repartitionPas[i]/totalPas)
+    print("Pas totaux : ", totalPas)
+
+
+secteursCustom2DSR(100, 10000)
