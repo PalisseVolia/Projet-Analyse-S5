@@ -353,6 +353,24 @@ def secteurs3D(n, nbsample):
     print(Zneg, " pas dans le quadrant Z négatif soit ",
           100*Zneg/totalpas, "% des pas")
     print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
+    
+    #----------histogramme-------------
+    
+    val = []
+    val.append(Zpos)
+    val.append(Zneg)
+    fig, axs = plt.subplots(1, 1,
+                            figsize =(10, 7),
+                            tight_layout = True)
+    etiquette = ['Z positif','Z négatif']
+    axs.bar(etiquette, val, color = '#fde725')
+   
+        
+    plt.xlabel("Secteur")
+    plt.ylabel("Nombre de passage")
+    plt.title("Histogramme de la fréquence de passage dans les secteurs Z>0 et Z<0, n = " 
+              + str(n) + " pour "+ str(nbsample)+" marches simulées")
 
 
-secteurs3D(1000, 10000)
+
+secteurs3D(10, 100)
