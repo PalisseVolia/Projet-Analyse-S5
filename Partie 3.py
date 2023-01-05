@@ -302,9 +302,56 @@ secteurs3D(1000, 10000)
 
 # %% Question 7
 print("\n \n Question 7")
-# -------------------- Définition des secteurs
-print("\n Définition des secteurs \n")
+# -------------------- Fréquence de passage dans deux secteur (espace 3D divisé en deux)
+print("\n Fréquence de passage dans deux secteur (espace 3D divisé en deux) \n")
 
 
-# -------------------- Fréquence de passage dans chaque secteur
-print("\n Fréquence de passage dans chaque secteur \n")
+def secteurs3D(n, nbsample):
+    posX = 0
+    posY = 0
+    posZ = 0
+
+    Zpos = 0
+    Zneg = 0
+    interface = 0
+
+    for i in range(0, nbsample):
+        for j in range(1, n+1):
+            rdm = random.uniform(0, 1.5)
+            if rdm <= 0.25:
+                posX += 1
+            elif (rdm <= 0.5) & (rdm > 0.25):
+                posX += -1
+            elif (rdm <= 0.75) & (rdm > 0.5):
+                posY += 1
+            elif (rdm <= 1) & (rdm > 0.75):
+                posY += -1
+            elif (rdm <= 1.25) & (rdm > 1):
+                posZ += 1
+            else:
+                posZ += -1
+
+            # On compare le signe des coordonnées pour déterminer dans quel quadrant se situe le marcheur
+            if (posZ > 0):
+                Zpos += 1
+            elif (posZ < 0):
+                Zneg += 1
+            else:
+                interface += 1
+
+        posX = 0
+        posY = 0
+        posZ = 0
+
+    # Nombre total de pas
+    totalpas = Zpos + Zneg
+    print("On a un nombre de pas ", n, " et ", nbsample, " marches aléatoires")
+    print("Le marcheur fait :")
+    print(Zpos, " pas dans le quadrant Z positif soit ",
+          100*Zpos/totalpas, "% des pas")
+    print(Zneg, " pas dans le quadrant Z négatif soit ",
+          100*Zneg/totalpas, "% des pas")
+    print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
+
+
+secteurs3D(1000, 10000)
