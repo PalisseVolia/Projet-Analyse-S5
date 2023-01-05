@@ -6,13 +6,6 @@ import math
 import random
 from collections import Counter
 # %%
-from turtle import color
-from matplotlib import colors
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-import random
-from collections import Counter
 
 def marche1(n):
     pos = 0
@@ -38,13 +31,6 @@ marche1(10)
 #%% 
 
 #-----------------Histogramme-----------------
-from turtle import color
-from matplotlib import colors
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-import random
-from collections import Counter
 
 def marche1(n):
     pos = 0
@@ -103,8 +89,6 @@ histogramme1D(Ntot,n)
 #%%
 #-----------------Probabilité de repasser au moins une fois par 0 au bout de n étape-----------------
 
-import random
-
 def marche1_passage_à_0(n):
     pos = 0
     test = False
@@ -139,13 +123,6 @@ proba_passage_à_0(Ntot,n)
 
 #%%
 #-----------------temps moyen-----------------
-from turtle import color
-from matplotlib import colors
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-import random
-from collections import Counter
 
 def marche1_retour_à_0(Ntot,n):
     pos = 0
@@ -209,13 +186,6 @@ histogramme1D_retour_à_0(Ntot,n)
 
 #%%
 #-----------------Autres valeurs de p-----------------
-from turtle import color
-from matplotlib import colors
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-import random
-from collections import Counter
 
 def marche1(n,p):
     pos = 0
