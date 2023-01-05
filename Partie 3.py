@@ -106,7 +106,7 @@ def marche3(n):
     plt.show()
 
 
-marche3(5000)
+marche3(10000)
 
 
 # %% Question 4
@@ -161,7 +161,7 @@ def distance(n, nbsample):
 
 # distance(n,nbsample) avec n le nombre de pas et nbsample le nombre d'échantillons
 # les points bleu représentent tout les points (Xn,Yn,Zn) et le rose l'origine
-distance(100, 1000)
+distance(10000, 1000)
 
 
 # %% Question 5
@@ -210,7 +210,7 @@ def retour03D(n, nbsample):
     print("Soit une probabilité de retourner à 0 de : ", round(nb0/nbsample, 3))
 
 
-retour03D(100000, 1000)
+retour03D(10000, 100000)
 
 
 # %% Question 6
@@ -276,7 +276,7 @@ def secteurs3D(n, nbsample):
     totalpas = XposYposZpos + XposYposZneg + \
         XposYnegZpos + XposYnegZneg + XnegYposZpos + \
         XnegYposZneg + XnegYnegZpos + XnegYnegZneg
-    print("On a un nombre de pas ", n, " et ", nbsample, " marches aléatoires")
+    print("On a un nombre de pas "+ str(n) + " et "+ str(nbsample) + " marches aléatoires")
     print("Le marcheur fait :")
     print(XposYposZpos, " pas dans le quadrant X positif Y positif Z positif soit ",
           100*XposYposZpos/totalpas, "% des pas")
@@ -304,6 +304,11 @@ secteurs3D(1000, 10000)
 print("\n \n Question 7")
 # -------------------- Définition des secteurs
 print("\n Définition des secteurs \n")
+
+
+ 
+
+
 
 
 # -------------------- Fréquence de passage dans chaque secteur
