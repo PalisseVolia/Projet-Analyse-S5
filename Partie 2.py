@@ -84,7 +84,7 @@ def marche2(n):
     plt.show()
 
 
-marche2(500)
+marche2(10000)
 
 
 # -------------------- Marche aléatoire 2D sans retour en arrière
@@ -219,7 +219,7 @@ def marche2SR(n):
     plt.show()
 
 
-marche2SR(100)
+marche2SR(10000)
 
 
 # %% Question 4
@@ -263,11 +263,42 @@ def distance(n, nbsample):
     plt.axis('square')
     plt.show()
     print("Pour n=", n, " la distance moyenne à l'origine est de ", st.mean(distance))
+    
+    distance.sort()
+    for i in range(len(distance)):
+        distance[i] = round(distance[i])
+        
+    Liste = Counter(distance).most_common() 
+    fig, axs = plt.subplots(1, 1,
+                            figsize =(10, 7),
+                            tight_layout = True)
+    
+    print(Liste)
+
+    x = []
+    for i in Liste:
+        x.append(i[0])
+
+    x.sort()
+    N, bins, patches = axs.hist(distance, bins = range(len(x)), histtype='bar', align='left')
+    fracs = ((N**(1 / 5)) / N.max())
+    norm = colors.Normalize(fracs.min(), fracs.max())
+    
+    for thisfrac, thispatch in zip(fracs, patches):
+        color = plt.cm.viridis(norm(thisfrac))
+        thispatch.set_facecolor(color)
+        
+  
+    plt.xlabel("distance")
+    plt.ylabel("Fréquence")
+    plt.title("Histogramme des distances obtenues pour n = " 
+              + str(n))
+    plt.show()
 
 
 # distance(n,nbsample) avec n le nombre de pas et nbsample le nombre d'échantillons
 # les points bleu représentent tout les points (Xn,Yn) et le rose l'origine
-distance(1000, 1000)
+#distance(1000, 1000)
 
 
 # -------------------- Distance moyenne à l'origine sans retour en arrière
@@ -369,14 +400,43 @@ def distanceSR(n, nbsample):
     plt.axis('square')
     plt.show()
     print("Pour n=", n, " la distance moyenne à l'origine est de ", st.mean(distance))
+    
+    distance.sort()
+    for i in range(len(distance)):
+        distance[i] = round(distance[i])
+        
+    Liste = Counter(distance).most_common() 
+    fig, axs = plt.subplots(1, 1,
+                            figsize =(10, 7),
+                            tight_layout = True)
+    x = []
+    for i in Liste:
+        x.append(i[0])
+    x.sort()
+    N, bins, patches = axs.hist(distance, bins = range(len(x)), histtype='bar', align='left')
+    fracs = ((N**(1 / 5)) / N.max())
+    norm = colors.Normalize(fracs.min(), fracs.max())
+    
+    for thisfrac, thispatch in zip(fracs, patches):
+        color = plt.cm.viridis(norm(thisfrac))
+        thispatch.set_facecolor(color)  
+    plt.xlabel("Distance")
+    plt.ylabel("Fréquence")
+    plt.title("Histogramme des distances obtenues pour n = " 
+              + str(n))
+    plt.show()
 
 
-distanceSR(1000, 1000)
+
+distance(10000, 10000)
+distanceSR(10000, 10000)
 # %% Question 5
 print("\n \n Question 5")
 # -------------------- Probabilité de retour à (0,0)
 print("\n Probabilité de retour à (0,0) \n")
 
+n = 1000000
+Ntot = 1000
 
 def retour02D(n, nbsample):
     j = 0
@@ -412,7 +472,7 @@ def retour02D(n, nbsample):
     print("Soit une probabilité de retourner à 0 de : ", round(nb0/nbsample, 3))
 
 
-retour02D(100, 10000)
+retour02D(n, Ntot)
 
 
 # -------------------- Probabilité de retour à (0,0) sans retour en arrière
@@ -517,7 +577,7 @@ def retour02DSR(n, nbsample):
           round(nb0/nbsample, 3))
 
 
-retour02DSR(100, 10000)
+retour02DSR(n, Ntot)
 
 
 # %% Question 6
@@ -575,8 +635,9 @@ def secteurs2D(n, nbsample):
           100*xposyneg/totalpas, "% des pas")
     print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
 
-
-secteurs2D(100, 10000)
+n = 1000
+Ntot = 1
+secteurs2D(n, Ntot)
 
 
 # -------------------- Fréquence de passage dans chaque secteur sans retour en arrière
@@ -695,7 +756,7 @@ def secteurs2DSR(n, nbsample):
     print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
 
 
-secteurs2DSR(100, 10000)
+secteurs2DSR(n, Ntot)
 
 
 # %% Question 7
@@ -703,7 +764,8 @@ print("\n \n Question 7")
 # -------------------- Définition des secteurs
 print("\n Définition des secteurs \n")
 
-
+n= 100
+Ntot = 10000
 # Array réunissant les angles des demi droites partant de l'origine
 angles = []
 
@@ -716,7 +778,6 @@ def demidroites():
 
     x = 1
     y = 1
-
     while (x+y != 0.0):
         print("Votre point : (", x, ",", y, ")")
         x = float(input("Entrez X"))
@@ -749,12 +810,12 @@ def demidroites():
 
 
 # Choix des demi droites
-demidroites()
+#demidroites()
 
 
 # Exemples préremplis (on devrait avoir 25%, 25%, 25%, 12.5%, 12.5%)
-# angles = [45, 90, 180, 270, 315]
-
+angles = [45, 90, 180, 270, 315]
+#angles = [20, 50, 140, 230, 320]
 
 # -------------------- Fréquence de passage dans chaque secteur
 print("\n Fréquence de passage dans chaque secteur \n")
@@ -767,7 +828,6 @@ def secteursCustom2D(n, nbsample):
     anglePas = 0
     done = False
     repartitionPas = np.zeros(len(angles))
-
     for i in range(0, nbsample):
         for j in range(1, n+1):
             rdm = random.uniform(0, 1)
@@ -780,7 +840,7 @@ def secteursCustom2D(n, nbsample):
             else:
                 posY += -1
 
-            # On calcule l'angle du nouveau point
+            # On calcule l'angle du nouveau point par rapport à l'origine
             if (posX+posY != 0.0):
                 if (posX >= 0.0) & (posY >= 0.0):
                     if posX != 0.0:
@@ -832,9 +892,33 @@ def secteursCustom2D(n, nbsample):
         print("Secteur ", i+1, " a une fréquence de passage de : ",
               100*repartitionPas[i]/totalPas)
     print("Pas totaux : ", totalPas)
+    #----------histogramme-------------
+
+    c= 1
+    freq = []
+    for i in repartitionPas : 
+        for j in range(int(i)):
+            freq.append(c)
+        c += 1
+    fig, axs = plt.subplots(1, 1,
+                            figsize =(10, 7),
+                            tight_layout = True)
+
+    N, bins, patches = axs.hist(freq, bins = range(0, len(repartitionPas)+2), align='left', rwidth = 0.6)
+    fracs = ((N**(1 / 5)) / N.max())
+    norm = colors.Normalize(fracs.min(), fracs.max())
+    
+    for thisfrac, thispatch in zip(fracs, patches):
+        color = plt.cm.viridis(norm(thisfrac))
+        thispatch.set_facecolor(color)
+        
+    plt.xlabel("Secteur")
+    plt.ylabel("Nombre de passage")
+    plt.title("Histogramme de la fréquence de passage dans les secteurs n = " 
+              + str(n) + " pour "+ str(Ntot)+" marches simulées")
 
 
-secteursCustom2D(100, 10000)
+secteursCustom2D(n, Ntot)
 
 
 # -------------------- Fréquence de passage dans chaque secteur sans retour
@@ -853,7 +937,6 @@ def secteursCustom2DSR(n, nbsample):
     done = False
     done2 = False
     repartitionPas = np.zeros(len(angles))
-
     for i in range(0, nbsample):
         rdm = random.uniform(0, 1)
         if rdm <= 0.25:
@@ -924,7 +1007,6 @@ def secteursCustom2DSR(n, nbsample):
                     subY = True
                 done = True
             done = False
-
             # On calcule l'angle du nouveau point
             if (posX+posY != 0.0):
                 if (posX >= 0.0) & (posY >= 0.0):
@@ -976,6 +1058,34 @@ def secteursCustom2DSR(n, nbsample):
         print("Secteur ", i+1, " a une fréquence de passage de : ",
               100*repartitionPas[i]/totalPas)
     print("Pas totaux : ", totalPas)
+    print(repartitionPas)
+    
+    
+    #----------histogramme-------------
 
+    c= 1
+    freq = []
+    for i in repartitionPas : 
+        for j in range(int(i)):
+            freq.append(c)
+        c += 1
+    fig, axs = plt.subplots(1, 1,
+                            figsize =(10, 7),
+                            tight_layout = True)
 
-secteursCustom2DSR(100, 10000)
+    N, bins, patches = axs.hist(freq, bins = range(0, len(repartitionPas)+2), align='left', rwidth = 0.6)
+    fracs = ((N**(1 / 5)) / N.max())
+    norm = colors.Normalize(fracs.min(), fracs.max())
+    
+    for thisfrac, thispatch in zip(fracs, patches):
+        color = plt.cm.viridis(norm(thisfrac))
+        thispatch.set_facecolor(color)
+        
+    plt.xlabel("Secteur")
+    plt.ylabel("Nombre de passage")
+    plt.title("Histogramme de la fréquence de passage dans les secteurs n = " 
+              + str(n) + " pour "+ str(Ntot)+" marches simulées")
+
+secteursCustom2DSR(n, Ntot)
+
+# %%
