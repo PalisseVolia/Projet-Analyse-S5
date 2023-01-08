@@ -5,7 +5,11 @@ import matplotlib.pyplot as plt
 import math
 import random
 from collections import Counter
-# %%
+
+# %% Question 1
+print("\n \n Question 1")
+# -------------------- Simulation de marche
+print("\n Simulation de marche 1D \n")
 
 def marche1(n):
     pos = 0
@@ -28,9 +32,10 @@ def marche1(n):
     
 marche1(10)
 
-#%% 
-
-#-----------------Histogramme-----------------
+# %% Question 2
+print("\n \n Question 2")
+# -------------------- Histogrammes
+print("\n Histogrammes \n")
 
 def marche1(n):
     pos = 0
@@ -75,7 +80,6 @@ def histogramme1D(Ntot, n):
     plt.title("Histogramme des positions finales obtenues pour n = " 
               + str(n) + " pour "+ str(Ntot)+" marches simulées")
     
-    # Show plot
     plt.show()
     proba = y[0]/Ntot
     print("La probabilité de finir à 0 au bout de "+ str(n)+ " pas est de "+str(proba))
@@ -85,9 +89,10 @@ Ntot = 100000
 n = 1000
 histogramme1D(Ntot,n)
 
-
-#%%
-#-----------------Probabilité de repasser au moins une fois par 0 au bout de n étape-----------------
+# %% Question 3
+print("\n \n Question 3")
+# -------------------- Probabilité de repasser au moins une fois par 0 au bout de n étape
+print("\n Probabilité de repasser au moins une fois par 0 \n")
 
 def marche1_passage_à_0(n):
     pos = 0
@@ -121,8 +126,10 @@ n = 1000
 proba_passage_à_0(Ntot,n)
 
 
-#%%
-#-----------------temps moyen-----------------
+# %% Question 4
+print("\n \n Question 4")
+# -------------------- temps moyen
+print("\n Temps moyen\n")
 
 def marche1_retour_à_0(Ntot,n):
     pos = 0
@@ -184,8 +191,11 @@ Ntot = 10000
 n = 10000
 histogramme1D_retour_à_0(Ntot,n)
 
-#%%
-#-----------------Autres valeurs de p-----------------
+# %% Question 5
+print("\n \n Question 5")
+# -------------------- autres valeurs de p
+print("\n Autres valeurs de p \n")
+
 
 def marche1(n,p):
     pos = 0

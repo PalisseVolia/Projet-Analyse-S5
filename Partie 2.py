@@ -272,8 +272,6 @@ def distance(n, nbsample):
     fig, axs = plt.subplots(1, 1,
                             figsize =(10, 7),
                             tight_layout = True)
-    
-    print(Liste)
 
     x = []
     for i in Liste:
@@ -298,7 +296,7 @@ def distance(n, nbsample):
 
 # distance(n,nbsample) avec n le nombre de pas et nbsample le nombre d'échantillons
 # les points bleu représentent tout les points (Xn,Yn) et le rose l'origine
-#distance(1000, 1000)
+distance(1000, 100000)
 
 
 # -------------------- Distance moyenne à l'origine sans retour en arrière
@@ -428,8 +426,8 @@ def distanceSR(n, nbsample):
 
 
 
-distance(10000, 10000)
-distanceSR(10000, 10000)
+
+distanceSR(1000, 100000)
 # %% Question 5
 print("\n \n Question 5")
 # -------------------- Probabilité de retour à (0,0)

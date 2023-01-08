@@ -161,7 +161,7 @@ def distance(n, nbsample):
 
 # distance(n,nbsample) avec n le nombre de pas et nbsample le nombre d'échantillons
 # les points bleu représentent tout les points (Xn,Yn,Zn) et le rose l'origine
-distance(10000, 1000)
+distance(1000, 10000)
 
 
 # %% Question 5
@@ -373,4 +373,4 @@ def secteurs3D(n, nbsample):
 
 
 
-secteurs3D(10, 100)
+secteurs3D(100, 100000)
