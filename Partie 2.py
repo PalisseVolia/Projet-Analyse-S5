@@ -1,4 +1,5 @@
 # %%
+import os
 from turtle import color
 from matplotlib import colors
 import numpy as np
@@ -8,7 +9,7 @@ import math
 import random
 import statistics as st
 from collections import Counter
-matplotlib.rcParams["figure.dpi"] = 500
+# matplotlib.rcParams["figure.dpi"] = 50
 
 # %% Questions 2/3
 print("\n \n Questions 2/3")
@@ -84,7 +85,7 @@ def marche2(n):
     plt.show()
 
 
-marche2(10000)
+marche2(3000)
 
 
 # -------------------- Marche aléatoire 2D sans retour en arrière
@@ -219,7 +220,7 @@ def marche2SR(n):
     plt.show()
 
 
-marche2SR(10000)
+marche2SR(3000)
 
 
 # %% Question 4
@@ -263,40 +264,40 @@ def distance(n, nbsample):
     plt.axis('square')
     plt.show()
     print("Pour n=", n, " la distance moyenne à l'origine est de ", st.mean(distance))
-    
+
     distance.sort()
     for i in range(len(distance)):
         distance[i] = round(distance[i])
-        
-    Liste = Counter(distance).most_common() 
+
+    Liste = Counter(distance).most_common()
     fig, axs = plt.subplots(1, 1,
-                            figsize =(10, 7),
-                            tight_layout = True)
+                            figsize=(10, 7),
+                            tight_layout=True)
 
     x = []
     for i in Liste:
         x.append(i[0])
 
     x.sort()
-    N, bins, patches = axs.hist(distance, bins = range(len(x)), histtype='bar', align='left')
+    N, bins, patches = axs.hist(distance, bins=range(
+        len(x)), histtype='bar', align='left')
     fracs = ((N**(1 / 5)) / N.max())
     norm = colors.Normalize(fracs.min(), fracs.max())
-    
+
     for thisfrac, thispatch in zip(fracs, patches):
         color = plt.cm.viridis(norm(thisfrac))
         thispatch.set_facecolor(color)
-        
-  
+
     plt.xlabel("distance")
     plt.ylabel("Fréquence")
-    plt.title("Histogramme des distances obtenues pour n = " 
+    plt.title("Histogramme des distances obtenues pour n = "
               + str(n))
     plt.show()
 
 
 # distance(n,nbsample) avec n le nombre de pas et nbsample le nombre d'échantillons
 # les points bleu représentent tout les points (Xn,Yn) et le rose l'origine
-distance(1000, 100000)
+distance(1000, 10000)
 
 
 # -------------------- Distance moyenne à l'origine sans retour en arrière
@@ -398,43 +399,43 @@ def distanceSR(n, nbsample):
     plt.axis('square')
     plt.show()
     print("Pour n=", n, " la distance moyenne à l'origine est de ", st.mean(distance))
-    
+
     distance.sort()
     for i in range(len(distance)):
         distance[i] = round(distance[i])
-        
-    Liste = Counter(distance).most_common() 
+
+    Liste = Counter(distance).most_common()
     fig, axs = plt.subplots(1, 1,
-                            figsize =(10, 7),
-                            tight_layout = True)
+                            figsize=(10, 7),
+                            tight_layout=True)
     x = []
     for i in Liste:
         x.append(i[0])
     x.sort()
-    N, bins, patches = axs.hist(distance, bins = range(len(x)), histtype='bar', align='left')
+    N, bins, patches = axs.hist(distance, bins=range(
+        len(x)), histtype='bar', align='left')
     fracs = ((N**(1 / 5)) / N.max())
     norm = colors.Normalize(fracs.min(), fracs.max())
-    
+
     for thisfrac, thispatch in zip(fracs, patches):
         color = plt.cm.viridis(norm(thisfrac))
-        thispatch.set_facecolor(color)  
+        thispatch.set_facecolor(color)
     plt.xlabel("Distance")
     plt.ylabel("Fréquence")
-    plt.title("Histogramme des distances obtenues pour n = " 
+    plt.title("Histogramme des distances obtenues pour n = "
               + str(n))
     plt.show()
 
 
-
-
-distanceSR(1000, 100000)
+distanceSR(1000, 10000)
 # %% Question 5
 print("\n \n Question 5")
 # -------------------- Probabilité de retour à (0,0)
 print("\n Probabilité de retour à (0,0) \n")
 
-n = 1000000
+n = 10000
 Ntot = 1000
+
 
 def retour02D(n, nbsample):
     j = 0
@@ -633,8 +634,9 @@ def secteurs2D(n, nbsample):
           100*xposyneg/totalpas, "% des pas")
     print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
 
+
 n = 1000
-Ntot = 1
+Ntot = 1000
 secteurs2D(n, Ntot)
 
 
@@ -762,7 +764,7 @@ print("\n \n Question 7")
 # -------------------- Définition des secteurs
 print("\n Définition des secteurs \n")
 
-n= 100
+n = 100
 Ntot = 10000
 # Array réunissant les angles des demi droites partant de l'origine
 angles = []
@@ -776,10 +778,14 @@ def demidroites():
 
     x = 1
     y = 1
+    first = True
+
     while (x+y != 0.0):
-        print("Votre point : (", x, ",", y, ")")
-        x = float(input("Entrez X"))
-        y = float(input("Entrez Y"))
+        if first != True:
+            print("Votre point : (", x, ",", y, ")")
+        first = False
+        x = float(input("Entrez X : "))
+        y = float(input("Entrez Y : "))
 
         if (x+y != 0.0):
             if (x >= 0.0) & (y >= 0.0):
@@ -807,13 +813,23 @@ def demidroites():
     angles.sort()
 
 
-# Choix des demi droites
-#demidroites()
+print("Voulez vous choisir vos droites (1) ou utiliser des valeurs préremplies (2) ?")
+choix = input("1/2 : ")
+choisi = False
+while choisi == False:
+    if choix == "1":
+        # Choix des demi droites
+        demidroites()
+        choisi = True
+    elif choix == "2":
+        # Exemples préremplis (on devrait avoir 25%, 25%, 25%, 12.5%, 12.5%)
+        angles = [45, 90, 180, 270, 315]
+        choisi = True
+    else:
+        print(
+            "Voulez vous choisir vos droites (1) ou utiliser des valeurs préremplies (2) ?")
+        choix = input("1/2 : ")
 
-
-# Exemples préremplis (on devrait avoir 25%, 25%, 25%, 12.5%, 12.5%)
-angles = [45, 90, 180, 270, 315]
-#angles = [20, 50, 140, 230, 320]
 
 # -------------------- Fréquence de passage dans chaque secteur
 print("\n Fréquence de passage dans chaque secteur \n")
@@ -890,30 +906,32 @@ def secteursCustom2D(n, nbsample):
         print("Secteur ", i+1, " a une fréquence de passage de : ",
               100*repartitionPas[i]/totalPas)
     print("Pas totaux : ", totalPas)
-    #----------histogramme-------------
+    # ----------histogramme-------------
 
-    c= 1
+    c = 1
     freq = []
-    for i in repartitionPas : 
+    for i in repartitionPas:
         for j in range(int(i)):
             freq.append(c)
         c += 1
     fig, axs = plt.subplots(1, 1,
-                            figsize =(10, 7),
-                            tight_layout = True)
+                            figsize=(10, 7),
+                            tight_layout=True)
 
-    N, bins, patches = axs.hist(freq, bins = range(0, len(repartitionPas)+2), align='left', rwidth = 0.6)
+    N, bins, patches = axs.hist(freq, bins=range(
+        0, len(repartitionPas)+2), align='left', rwidth=0.6)
     fracs = ((N**(1 / 5)) / N.max())
     norm = colors.Normalize(fracs.min(), fracs.max())
-    
+
     for thisfrac, thispatch in zip(fracs, patches):
         color = plt.cm.viridis(norm(thisfrac))
         thispatch.set_facecolor(color)
-        
+
     plt.xlabel("Secteur")
     plt.ylabel("Nombre de passage")
-    plt.title("Histogramme de la fréquence de passage dans les secteurs n = " 
-              + str(n) + " pour "+ str(Ntot)+" marches simulées")
+    plt.title("Histogramme de la fréquence de passage dans les secteurs n = "
+              + str(n) + " pour " + str(Ntot)+" marches simulées")
+    plt.show()
 
 
 secteursCustom2D(n, Ntot)
@@ -1056,34 +1074,36 @@ def secteursCustom2DSR(n, nbsample):
         print("Secteur ", i+1, " a une fréquence de passage de : ",
               100*repartitionPas[i]/totalPas)
     print("Pas totaux : ", totalPas)
-    print(repartitionPas)
-    
-    
-    #----------histogramme-------------
 
-    c= 1
+    # ----------histogramme-------------
+
+    c = 1
     freq = []
-    for i in repartitionPas : 
+    for i in repartitionPas:
         for j in range(int(i)):
             freq.append(c)
         c += 1
     fig, axs = plt.subplots(1, 1,
-                            figsize =(10, 7),
-                            tight_layout = True)
+                            figsize=(10, 7),
+                            tight_layout=True)
 
-    N, bins, patches = axs.hist(freq, bins = range(0, len(repartitionPas)+2), align='left', rwidth = 0.6)
+    N, bins, patches = axs.hist(freq, bins=range(
+        0, len(repartitionPas)+2), align='left', rwidth=0.6)
     fracs = ((N**(1 / 5)) / N.max())
     norm = colors.Normalize(fracs.min(), fracs.max())
-    
+
     for thisfrac, thispatch in zip(fracs, patches):
         color = plt.cm.viridis(norm(thisfrac))
         thispatch.set_facecolor(color)
-        
+
     plt.xlabel("Secteur")
     plt.ylabel("Nombre de passage")
-    plt.title("Histogramme de la fréquence de passage dans les secteurs n = " 
-              + str(n) + " pour "+ str(Ntot)+" marches simulées")
+    plt.title("Histogramme de la fréquence de passage dans les secteurs n = "
+              + str(n) + " pour " + str(Ntot)+" marches simulées")
+    plt.show()
+
 
 secteursCustom2DSR(n, Ntot)
 
 # %%
+os.system("pause")

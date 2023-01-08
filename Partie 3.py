@@ -1,4 +1,5 @@
 # %%
+import os
 from turtle import color
 from matplotlib import colors
 import numpy as np
@@ -8,7 +9,7 @@ import math
 import random
 import statistics as st
 from collections import Counter
-matplotlib.rcParams["figure.dpi"] = 500
+# matplotlib.rcParams["figure.dpi"] = 500
 
 # %% Questions 2/3
 print("\n \n Questions 2/3")
@@ -106,7 +107,7 @@ def marche3(n):
     plt.show()
 
 
-marche3(10000)
+marche3(4000)
 
 
 # %% Question 4
@@ -210,7 +211,7 @@ def retour03D(n, nbsample):
     print("Soit une probabilité de retourner à 0 de : ", round(nb0/nbsample, 3))
 
 
-retour03D(10000, 100000)
+retour03D(1000, 10000)
 
 
 # %% Question 6
@@ -353,24 +354,26 @@ def secteurs3D(n, nbsample):
     print(Zneg, " pas dans le quadrant Z négatif soit ",
           100*Zneg/totalpas, "% des pas")
     print("On ommet le nombre de pas situés pile entre deux quadrants, ils sont au nombre de ", interface)
-    
-    #----------histogramme-------------
-    
+
+    # ----------histogramme-------------
+
     val = []
     val.append(Zpos)
     val.append(Zneg)
     fig, axs = plt.subplots(1, 1,
-                            figsize =(10, 7),
-                            tight_layout = True)
-    etiquette = ['Z positif','Z négatif']
-    axs.bar(etiquette, val, color = '#fde725')
-   
-        
+                            figsize=(10, 7),
+                            tight_layout=True)
+    etiquette = ['Z positif', 'Z négatif']
+    axs.bar(etiquette, val, color='#fde725')
+
     plt.xlabel("Secteur")
     plt.ylabel("Nombre de passage")
-    plt.title("Histogramme de la fréquence de passage dans les secteurs Z>0 et Z<0, n = " 
-              + str(n) + " pour "+ str(nbsample)+" marches simulées")
+    plt.title("Histogramme de la fréquence de passage dans les secteurs Z>0 et Z<0, n = "
+              + str(n) + " pour " + str(nbsample)+" marches simulées")
+    plt.show()
 
 
+secteurs3D(100, 10000)
 
-secteurs3D(100, 100000)
+# %%
+os.system("pause")
